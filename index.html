@@ -1,34 +1,66 @@
-<!doctype HTML>
+<-DOCTYPE html>
+<!--script src="../aframe.min.js"></script>
+<script src="../aframe-ar.js"></script-->
+
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    </head>
+  <head>
     <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script src="https://rawgit.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/events.js"></script>
-    <body style='margin : 0px; overflow: hidden;'>
-        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
-        <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+    <!--script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script-->
+</head>
 
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+<style>
+  canvas  { -moz-transform: scale(-1, 1); -webkit-transform: scale(-1, 1);  -o-transform: scale(-1, 1); -ms-transform: scale(-1, 1);  transform: scale(-1, 1);  }
+  video  {  -moz-transform: scale(-1, 1); -webkit-transform: scale(-1, 1);  -o-transform: scale(-1, 1); -ms-transform: scale(-1, 1);  transform: scale(-1, 1);  }
+</style>
+<div style='position: fixed; top: 0px; width:inherit; text-align: center; z-index: 1; background-color: rgba(255, 255, 255, 0.6);'>
+  <font size=4>
+  <p align=left><a href="https://clustrmaps.com/site/16ven" title="Visit tracker" target="_blank"><img src="//www.clustrmaps.com/map_v2.png?d=WKH-KVfaTQVRp0prhtkOvyuUkN06NcEhV8jz6L6pKpk&cl=ffffff"  width="1%" height="1%" alt="" /></a> <b>Simplest example, using HTML only: two small molecules driven by markers (<a href="../markers.docx" download>download here</a> and print or load in phones)</b></p>
+  <p align=center><h2>CLICK SCREEN TO START -- AND CHECK YOUR AD BLOCKER</h2></p>
+  </font>
+</div>
+<div style='position: fixed; top: 0px; right:0px; width:400; text-align: right; z-index: 1; background-color: rgba(255, 255, 255, 0);'>
+  <font size=4>
+  <p align=right><a href="" target="_blank"><b>[Open in new window]</b></a></p>
+  </font>
+</div>
+
+  <!--a-scene embedded artoolkit='sourceType: webcam;' id="thescene"-->
+    <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
+
+          <!--a-assets>
+            <a-asset-item id="pato" src="duck.gltf">
+          </a-assets-->
+          
         <a-assets>
             <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
         </a-assets>
+        
+    <!-- handle hiro marker-->
+    <a-marker preset='hiro'>
+          <!--a-entity gltf-model="src:url(https://lucianoabriata.altervista.org/jsinscience/arjs/armodeling/duck.gltf)"></a-entity-->
+        <!-- Using the asset management system. -->
+        <a-gltf-model src="#animated-asset"></a-gltf-model>
+    </a-marker>
+    
+    <!-- handle kanji marker -->
+    <a-marker preset='kanji' id="glumarker">
+          <!-- This is a glutamate side chain, starting from the CA atom, which is set to the origin-->
+          <a-sphere id="glu1" position="0.000   0.000   0.000" color="grey" radius="0.4"></a-sphere>
+          <a-sphere id="glu2" position="-0.6365 -0.3515 -0.238" color="grey" radius="0.4"></a-sphere>
+          <a-sphere id="glu3" position="-1.2485 0.0445 -0.006" color="grey" radius="0.4"></a-sphere>
+          <a-sphere id="glu4" position="-1.8755 -0.3015 -0.2405" color="grey" radius="0.4"></a-sphere>
+          <a-sphere id="glu5" position="-1.836 -0.8175 -0.563" color="red" radius="0.4"></a-sphere>
+          <a-sphere id="glu6" position="-2.4215 -0.066 -0.1075" color="red" radius="0.4"></a-sphere>
+          <a-sphere id="glu7" position="-0.635 -0.381 -0.7825" color="white" radius="0.2"></a-sphere>
+          <a-sphere id="glu8" position="-0.6555 -0.854 -0.0285" color="white" radius="0.2"></a-sphere>
+          <a-sphere id="glu9" position="-1.25 0.0745 0.538" color="white" radius="0.2"></a-sphere>
+          <a-sphere id="glu10" position="-1.2295 0.5475 -0.2155" color="white" radius="0.2"></a-sphere>
+    </a-marker>
 
-        <a-marker type='barcode' value='7'>
-            <a-box position='0 0.5 0' color="red"></a-box>
-        </a-marker>
-
-        <a-marker markerhandler emitevents="true" cursor="fuse: false; rayOrigin: mouse" id="animated-marker" type='barcode' value='6'>
-            <a-entity
-                id="animated-model"
-                gltf-model="#animated-asset"
-                scale="2">
-            </a-entity>
-        </a-marker>
-
-        <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
+    <!-- add a simple camera -->
         <a-entity camera></a-entity>
-        </a-scene>
-    </body>
+  </a-scene>
+</body>
 </html>
