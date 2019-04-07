@@ -4,12 +4,12 @@
 <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
   <body style='margin : 0px; overflow: hidden;'>
     <a-scene embedded arjs>
-      <a-marker preset="hiro">
+     <a-entity scale=".2 .2 .2">
           
           <a-entity gltf-model="assets/Alien_01.gltf" 
-          scale=".2 .2 .2" 
+          scale=".5 .5 .5" 
           rotation="0 0 0"
-          position="0 0.2 0">
+          position="0 1 0">
 
           <a-animation 
           attribute="rotation" 
@@ -19,10 +19,10 @@
           easing="linear">
           </a-animation>
 
-          <a-entity position="1 0 2" scale ="2 2 2" text="value: HELLO WORLD; color: black;">
+<!--           <a-entity position="1 0 2" scale ="2 2 2" text="value: HELLO WORLD; color: black;"> -->
           </a-entity>
           </a-entity>
-      </a-marker>
+       <a-marker-camera preset="hiro"></a-marker-camera>
       <a-entity camera></a-entity>
     </a-scene>
   </body>
